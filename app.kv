@@ -1,0 +1,95 @@
+BoxLayout:
+    orientation: 'horizontal'
+	BoxLayout:
+	    size_hint_x: 0.2
+	    orientation: 'vertical'
+	    Label:
+	        text: 'Sort by:'
+	        font_size: 12
+
+
+        Spinner:
+            id: state_selection
+            text: app.current_state
+            # values takes a list - could be a literal here or variable in app
+            values: app.state_codes
+            # on_text is the event (not on_release) when the text updates (spinner option is selected)
+            # note that on_text runs even when the text is set for the very first time
+            on_text: app.change_state(self.text)
+
+
+	    Label:
+	        text: 'Add new movie...'
+	        font_size: 12
+
+	    Label:
+	        text: 'Title:'
+	        font_size: 12
+
+
+        TextInput:
+            id: input_title
+            value: ''
+            size_hint_y: None
+            height: '48dp'
+            # the next two lines make it so that pressing Tab moves the cursor
+            # to the next input field instead of entering the Tab character
+            multiline: False
+            write_tab: False
+
+	    Label:
+	        text: 'Category:'
+	        font_size: 12
+
+        TextInput:
+            id: input_category
+            value: ''
+            size_hint_y: None
+            height: '48dp'
+            # the next two lines make it so that pressing Tab moves the cursor
+            # to the next input field instead of entering the Tab character
+            multiline: False
+            write_tab: False
+
+	    Label:
+	        text: 'Year:'
+	        font_size: 12
+
+        TextInput:
+            id: input_year
+            size_hint_y: None
+            height: '48dp'
+            # the next two lines make it so that pressing Tab moves the cursor
+            # to the next input field instead of entering the Tab character
+            multiline: False
+            write_tab: False
+            input_filter: "float"
+
+        Button:
+        	id: add_movie
+            text: 'Add Movie'
+            on_release: app.add_movie()
+
+        Button:
+        	id: clear
+            text: 'Clear'
+            on_release: app.clear()
+
+    BoxLayout:
+	    size_hint_x: 0.8
+	    orientation: 'vertical'
+	    Label:
+            id: status_label
+            size_hint_y: 0.1
+	        text: 'Status'
+	        font_size: 12
+        GridLayout:
+            # this layout is populated with (button) widgets in app code
+            id: entries_box
+            cols: 1
+            orientation: 'vertical'
+        Label:
+            id: event_label
+            size_hint_y: 0.1
+            text: ""
+	    
